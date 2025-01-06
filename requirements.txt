@@ -2,3 +2,4 @@ pandas
 statsmodels
 numpy
 scikit-learn
+matplotlib

@@ -35,3 +35,5 @@ plt.bar(y_pos, z_scores)
 plt.plot((0, 25), (1, 1), 'g-')
 plt.plot((0, 25), (0, 0), 'b-')
 plt.plot((0, 25), (-1, -1), 'r-')
+
+plt.show()
