@@ -3,3 +3,4 @@ statsmodels
 numpy
 scikit-learn
 matplotlib
+nltp
