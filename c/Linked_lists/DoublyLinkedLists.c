@@ -105,7 +105,7 @@ void main() {
 
 
 struct Node* getNode(int n) {
-    struct Node* p = malloc(sizeof *p);
+    struct Node* p = malloc(sizeof(struct Node));
     if (p == NULL) {
         printf("No memory allocated.\n");
         return NULL;
@@ -114,8 +114,6 @@ struct Node* getNode(int n) {
     p->next = p->prev = NULL;
     return p;
 }
-
-
 
 void traverse() {
     struct Node* temp = Start;

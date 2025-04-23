@@ -6,6 +6,13 @@
             "name": "firstjava",
             "request": "launch",
             "mainClass": "firstjava",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
+            "name": "firstjava",
+            "request": "launch",
+            "mainClass": "firstjava",
             "projectName": "Coding_b11a21e4"
         },
         {

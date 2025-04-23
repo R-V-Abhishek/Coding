@@ -335,5 +335,25 @@ void bubble_sort() {
             ptr1 = ptr1->next;
         }
         lptr = ptr1;
-    } while (swapped);
+    } while (lptr != Start && swapped);
+}
+
+void reverse_list() {
+    if (Start == NULL || Start->next == NULL) {
+        return;  // Empty list or single node
+    }
+    
+    struct Node *prev = NULL;
+    struct Node *current = Start;
+    struct Node *next = NULL;
+    
+    while (current != NULL) {
+        next = current->next;     // Store next node
+        current->next = prev;     // Reverse pointer
+        prev = current;           // Move prev forward
+        current = next;           // Move current forward
+    }
+    
+    Start = prev;                 // Update head pointer
+    traverse();
 }

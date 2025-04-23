@@ -14,7 +14,7 @@ void initialize(CircularQueue *q) {
 }
 
 int isFull(CircularQueue *q) {
-    if ((q->front == 0 && q->rear == SIZE - 1) || (q->front == q->rear + 1)) {
+    if (q->front == (q->rear + 1) % SIZE) {
         return 1;
     }
     return 0;
