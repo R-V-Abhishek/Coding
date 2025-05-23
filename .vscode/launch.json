@@ -3,6 +3,41 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Floyd",
+            "request": "launch",
+            "mainClass": "Floyd",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
+            "name": "Knapsack",
+            "request": "launch",
+            "mainClass": "Knapsack",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
+            "name": "TopologicalSorting",
+            "request": "launch",
+            "mainClass": "TopologicalSorting",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
+            "name": "Prim",
+            "request": "launch",
+            "mainClass": "Prim",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
+            "name": "HeapSort",
+            "request": "launch",
+            "mainClass": "HeapSort",
+            "projectName": "Coding_8bd937d6"
+        },
+        {
+            "type": "java",
             "name": "firstjava",
             "request": "launch",
             "mainClass": "firstjava",

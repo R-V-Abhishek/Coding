@@ -3,12 +3,12 @@ from sklearn.datasets import make_moons
 from sklearn.ensemble import RandomForestClassifier, VotingClassifier, BaggingClassifier, ExtraTreesClassifier, AdaBoostClassifier
 from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import GradientBoostingClassifier
-from sklearn. linear_model import LogisticRegression
+from sklearn.linear_model import LogisticRegression
 from sklearn.model_selection import train_test_split
 from sklearn.svm import SVC
 from sklearn.ensemble import StackingClassifier
 
-X, y = make_moons(noise=0.30, random_state=42)
+X, y = make_moons(n_samples = 1000, noise=0.30, random_state=42)
 feature_names = ['Feature 1', 'Feature 2']  # Assign feature names
 X = pd.DataFrame(X, columns=feature_names)
 X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=42)
@@ -33,9 +33,13 @@ print("Voting Classifier Score:", voting_clf.score(X_test, y_test))
 bagging_clf = BaggingClassifier(
     DecisionTreeClassifier(random_state=42),
     n_estimators=100,
+    max_samples=0.7,
     bootstrap=True,
     oob_score=True,
-    random_state=42
+    random_state=42,
+    max_features=0.7,
+    bootstrap_features=True,
+    n_jobs=-1
 )
 
 bagging_clf.fit(X_train, y_train)
@@ -43,11 +47,18 @@ print("Bagging Classifier OOB Score:", bagging_clf.oob_score_)
 print(bagging_clf.oob_decision_function_)
 
 
-rf_clf = RandomForestClassifier(random_state=42)
+rf_clf = RandomForestClassifier(
+    random_state=42,
+    max_depth=3,  # Decision tree depth
+    max_features=0.5,  # Number of features to consider when looking for the best split
+    n_estimators=100,  # Number of trees in the forest
+)
+
 rf_clf.fit(X_train, y_train)
 print("Random Forest Classifier Score:", rf_clf.score(X_test, y_test))
 for name, score in zip(rf_clf.feature_names_in_, rf_clf.feature_importances_):
     print(name, score)
+
 
 extra_trees_clf = ExtraTreesClassifier(random_state=42)
 extra_trees_clf.fit(X_train, y_train)
@@ -63,10 +74,11 @@ adaboost_clf = AdaBoostClassifier(
 adaboost_clf.fit(X_train, y_train)
 print("AdaBoost Classifier Score:", adaboost_clf.score(X_test, y_test))
 
+
 gradient_boost_clf = GradientBoostingClassifier(
     random_state=42,
     max_depth=3,  # Decision tree depth
-    learning_rate=0.1,
+    learning_rate=1,
     n_estimators=100
 )
 gradient_boost_clf.fit(X_train, y_train)
