@@ -1,0 +1,119 @@
+---
+title: "**Lab Program 1**"
+author: "**R V Abhishek**"
+date: "2025-08-13"
+output:
+  html_document: default
+  pdf_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Program to check what type of Triangle given 3 sides, and calculate its area
+
+## Validating the triangle
+
+```{r}
+is_valid_triangle <- function(a, b, c) {
+  return ((a + b > c) & (b + c > a) & (a + c > b ))
+}
+```
+
+## Function to check the type of triangle
+
+```{r}
+triangle_type <- function(a , b , c) {
+  if (a == b && b == c) {
+    return(" Equilateral ")
+  } else if ( a == b || b == c || a == c) {
+    return(" Isosceles ")
+  } else {
+    return("Scalene")
+  }
+}
+```
+
+## Calculating Area using Heron's Formula
+
+```{r}
+triangle_area <- function(a , b , c) {
+  s <- (a + b + c) / 2 # Semi - perimeter
+  # Heron ’s formula
+  area <- sqrt (s * (s - a) * (s - b) * (s - c))
+  return (area)
+}
+```
+
+## Validating inputs
+
+```{r}
+validate_input <- function(x) {
+  if (!is.numeric(x) || x <= 0) {
+    stop("Error : Input must be a positive number.")
+  }
+  return(TRUE)
+}
+```
+
+## Main Code Block
+
+1.  Defining 3 variables representing the 3 sides of the triangle
+
+```{r}
+cat("Enter the lengths of the sides of the triangle :\n") 
+a <- as.numeric(readline(prompt = "Side A: ")) 
+b <- as.numeric(readline(prompt = "Side B: ")) 
+c <- as.numeric(readline(prompt = "Side C: "))
+```
+
+2.  Input Validation and implementation of all the functions.
+
+```{r}
+# Input validation} 
+tryCatch ({ 
+  validate_input(a) 
+  validate_input(b) 
+  validate_input(c) 
+  
+  # Check if the inputs form a valid triangle 
+  if (!is_valid_triangle(a , b , c)) { 
+    stop("Error : The given sides do not form a valid triangle.")
+  }
+  
+  # Determine the type of triangle 
+  type_of_triangle <- triangle_type(a , b , c) 
+  cat("The triangle is:", type_of_triangle, "\n") 
+  # Calculate the area of the triangle 
+  area_of_triangle <- triangle_area(a, b, c) 
+  cat("The area of the triangle is:", area_of_triangle, "\n")
+
+}, error = function(e){ 
+  cat(e$message, "\n") 
+})
+```
+
+# Sample Output
+
+**Enter the lengths of the sides of the triangle:**
+
+**Side a:** 5
+
+**Side b:** 5
+
+**Side c:** 8
+
+**The triangle is:** Isosceles
+
+**The area of the triangle is:** 12
+
+**Enter the lengths of the sides of the triangle:**
+
+**Side a:** 1
+
+**Side b:** 2
+
+**Side c:** 8
+
+**Error:** The given sides do not form a valid triangle.

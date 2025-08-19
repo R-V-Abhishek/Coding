@@ -1,7 +1,18 @@
-pandas
-statsmodels
+# Core scientific computing packages
 numpy
-scikit-learn
+pandas
 matplotlib
-nltp
+
+# Time series analysis
+statsmodels
+
+# Deep learning packages
+torch
+torchvision
+
+# Additional packages that might be needed
+scipy
+seaborn
+scikit-learn
+jupyter
 ipykernel
