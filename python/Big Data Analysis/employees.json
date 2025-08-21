@@ -1,0 +1,55 @@
+{
+  "employees": [
+    {
+      "name": "John Doe",
+      "age": 30,
+      "city": "New York",
+      "salary": 75000,
+      "skills": ["Python", "SQL", "Machine Learning"],
+      "experience_years": 5,
+      "active": true
+    },
+    {
+      "name": "Jane Smith",
+      "age": 25,
+      "city": "Los Angeles",
+      "salary": 68000,
+      "skills": ["Java", "React", "MongoDB"],
+      "experience_years": 3,
+      "active": true
+    },
+    {
+      "name": "Bob Johnson",
+      "age": 35,
+      "city": "Chicago",
+      "salary": 82000,
+      "skills": ["C++", "Docker", "AWS"],
+      "experience_years": 8,
+      "active": false
+    },
+    {
+      "name": "Alice Brown",
+      "age": 28,
+      "city": "Houston",
+      "salary": 71000,
+      "skills": ["Python", "TensorFlow", "Statistics"],
+      "experience_years": 4,
+      "active": true
+    },
+    {
+      "name": "Charlie Davis",
+      "age": 32,
+      "city": "Phoenix",
+      "salary": 76000,
+      "skills": ["JavaScript", "Node.js", "PostgreSQL"],
+      "experience_years": 6,
+      "active": true
+    }
+  ],
+  "company": {
+    "name": "TechCorp Inc.",
+    "founded": 2010,
+    "headquarters": "San Francisco"
+  },
+  "last_updated": "2024-01-15"
+}

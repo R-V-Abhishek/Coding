@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<employees>
+    <employee id="1">
+        <name>John Doe</name>
+        <age>30</age>
+        <city>New York</city>
+        <salary>75000</salary>
+        <department>Engineering</department>
+        <hire_date>2019-03-15</hire_date>
+    </employee>
+    <employee id="2">
+        <name>Jane Smith</name>
+        <age>25</age>
+        <city>Los Angeles</city>
+        <salary>68000</salary>
+        <department>Marketing</department>
+        <hire_date>2021-07-22</hire_date>
+    </employee>
+    <employee id="3">
+        <name>Bob Johnson</name>
+        <age>35</age>
+        <city>Chicago</city>
+        <salary>82000</salary>
+        <department>Engineering</department>
+        <hire_date>2017-01-10</hire_date>
+    </employee>
+    <employee id="4">
+        <name>Alice Brown</name>
+        <age>28</age>
+        <city>Houston</city>
+        <salary>71000</salary>
+        <department>Data Science</department>
+        <hire_date>2020-09-08</hire_date>
+    </employee>
+    <employee id="5">
+        <name>Charlie Davis</name>
+        <age>32</age>
+        <city>Phoenix</city>
+        <salary>76000</salary>
+        <department>Engineering</department>
+        <hire_date>2018-11-30</hire_date>
+    </employee>
+</employees>

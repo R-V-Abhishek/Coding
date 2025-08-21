@@ -11,9 +11,9 @@
 
 <meta name="author" content="R V Abhishek" />
 
-<meta name="date" content="2025-08-13" />
+<meta name="date" content="2025-08-20" />
 
-<title>Lab Program - 1</title>
+<title>Lab Program - 2</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -421,96 +421,273 @@ display: none;
 
 
 
-<h1 class="title toc-ignore"><strong>Lab Program - 1</strong></h1>
+<h1 class="title toc-ignore"><strong>Lab Program - 2</strong></h1>
 <h4 class="author"><strong>R V Abhishek</strong></h4>
-<h4 class="date">2025-08-13</h4>
+<h4 class="date">2025-08-20</h4>
 
 </div>
 
 
-<p>Program to check what type of Triangle given 3 sides, and calculate
-its area</p>
-<p>This R program validates the sides of the triangle (taken as input
-from the user) and then if valid, calculates the area of the triangle
-using Heron’s formula and checks what type of triangle it is</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># Validating the triangle</span></span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>is_valid_triangle <span class="ot">&lt;-</span> <span class="cf">function</span>(a, b, c) {</span>
-<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="fu">return</span> ((a <span class="sc">+</span> b <span class="sc">&gt;</span> c) <span class="sc">&amp;</span> (b <span class="sc">+</span> c <span class="sc">&gt;</span> a) <span class="sc">&amp;</span> (a <span class="sc">+</span> c <span class="sc">&gt;</span> b ))</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" tabindex="-1"></a><span class="co"># Function to check the type of triangle</span></span>
-<span id="cb2-2"><a href="#cb2-2" tabindex="-1"></a>triangle_type <span class="ot">&lt;-</span> <span class="cf">function</span>(a , b , c) {</span>
-<span id="cb2-3"><a href="#cb2-3" tabindex="-1"></a>  <span class="cf">if</span> (a <span class="sc">==</span> b <span class="sc">&amp;&amp;</span> b <span class="sc">==</span> c) {</span>
-<span id="cb2-4"><a href="#cb2-4" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot; Equilateral &quot;</span>)</span>
-<span id="cb2-5"><a href="#cb2-5" tabindex="-1"></a>  } <span class="cf">else</span> <span class="cf">if</span> ( a <span class="sc">==</span> b <span class="sc">||</span> b <span class="sc">==</span> c <span class="sc">||</span> a <span class="sc">==</span> c) {</span>
-<span id="cb2-6"><a href="#cb2-6" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot; Isosceles &quot;</span>)</span>
-<span id="cb2-7"><a href="#cb2-7" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb2-8"><a href="#cb2-8" tabindex="-1"></a>    <span class="fu">return</span>(<span class="st">&quot;Scalene&quot;</span>)</span>
-<span id="cb2-9"><a href="#cb2-9" tabindex="-1"></a>  }</span>
-<span id="cb2-10"><a href="#cb2-10" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Calculating Area using Heron&#39;s Formula</span></span>
-<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>triangle_area <span class="ot">&lt;-</span> <span class="cf">function</span>(a , b , c) {</span>
-<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a>  s <span class="ot">&lt;-</span> (a <span class="sc">+</span> b <span class="sc">+</span> c) <span class="sc">/</span> <span class="dv">2</span> <span class="co"># Semi - perimeter</span></span>
-<span id="cb3-4"><a href="#cb3-4" tabindex="-1"></a>  <span class="co"># Heron ’s formula</span></span>
-<span id="cb3-5"><a href="#cb3-5" tabindex="-1"></a>  area <span class="ot">&lt;-</span> <span class="fu">sqrt</span> (s <span class="sc">*</span> (s <span class="sc">-</span> a) <span class="sc">*</span> (s <span class="sc">-</span> b) <span class="sc">*</span> (s <span class="sc">-</span> c))</span>
-<span id="cb3-6"><a href="#cb3-6" tabindex="-1"></a>  <span class="fu">return</span> (area)</span>
-<span id="cb3-7"><a href="#cb3-7" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="co"># Validating inputs</span></span>
-<span id="cb4-2"><a href="#cb4-2" tabindex="-1"></a>validate_input <span class="ot">&lt;-</span> <span class="cf">function</span>(x) {</span>
-<span id="cb4-3"><a href="#cb4-3" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is.numeric</span>(x) <span class="sc">||</span> x <span class="sc">&lt;=</span> <span class="dv">0</span>) {</span>
-<span id="cb4-4"><a href="#cb4-4" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Error : Input must be a positive number.&quot;</span>)</span>
-<span id="cb4-5"><a href="#cb4-5" tabindex="-1"></a>  }</span>
-<span id="cb4-6"><a href="#cb4-6" tabindex="-1"></a>  <span class="fu">return</span>(<span class="cn">TRUE</span>)</span>
-<span id="cb4-7"><a href="#cb4-7" tabindex="-1"></a>}</span></code></pre></div>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## Main Code Block</span></span>
-<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a></span>
-<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a><span class="co"># 1. Defining 3 variables representing the 3 sides of the triangle</span></span>
-<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Enter the lengths of the sides of the triangle :</span><span class="sc">\n</span><span class="st">&quot;</span>) </span></code></pre></div>
-<pre><code>Enter the lengths of the sides of the triangle :</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Side A: &quot;</span>)) </span></code></pre></div>
-<pre><code>Side A: </code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Side B: &quot;</span>)) </span></code></pre></div>
-<pre><code>Side B: </code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a>c <span class="ot">&lt;-</span> <span class="fu">as.numeric</span>(<span class="fu">readline</span>(<span class="at">prompt =</span> <span class="st">&quot;Side C: &quot;</span>))</span></code></pre></div>
-<pre><code>Side C: </code></pre>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># 2.  Input Validation and implementation of all the functions.</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="co"># Input validation} </span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="fu">tryCatch</span> ({ </span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a>  <span class="fu">validate_input</span>(a) </span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a>  <span class="fu">validate_input</span>(b) </span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a>  <span class="fu">validate_input</span>(c) </span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a>  </span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a>  <span class="co"># Check if the inputs form a valid triangle </span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a>  <span class="cf">if</span> (<span class="sc">!</span><span class="fu">is_valid_triangle</span>(a , b , c)) { </span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a>    <span class="fu">stop</span>(<span class="st">&quot;Error : The given sides do not form a valid triangle.&quot;</span>)</span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a>  }</span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a>  </span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a>  <span class="co"># Determine the type of triangle </span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a>  type_of_triangle <span class="ot">&lt;-</span> <span class="fu">triangle_type</span>(a , b , c) </span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;The triangle is:&quot;</span>, type_of_triangle, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) </span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a>  <span class="co"># Calculate the area of the triangle </span></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a>  area_of_triangle <span class="ot">&lt;-</span> <span class="fu">triangle_area</span>(a, b, c) </span>
-<span id="cb13-18"><a href="#cb13-18" tabindex="-1"></a>  <span class="fu">cat</span>(<span class="st">&quot;The area of the triangle is:&quot;</span>, area_of_triangle, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb13-19"><a href="#cb13-19" tabindex="-1"></a></span>
-<span id="cb13-20"><a href="#cb13-20" tabindex="-1"></a>}, <span class="at">error =</span> <span class="cf">function</span>(e){ </span>
-<span id="cb13-21"><a href="#cb13-21" tabindex="-1"></a>  <span class="fu">cat</span>(e<span class="sc">$</span>message, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>) </span>
-<span id="cb13-22"><a href="#cb13-22" tabindex="-1"></a>})</span></code></pre></div>
-<pre><code>missing value where TRUE/FALSE needed </code></pre>
-<div id="sample-output" class="section level2">
-<h2>Sample Output</h2>
-<pre><code>Enter the lengths of the sides of the triangle:
-Side a: 5
-Side b: 5 
-Side c: 8
+<div id="lab-program-2-creating-and-manipulating-data-structures" class="section level2">
+<h2>Lab-Program 2: Creating and Manipulating Data Structures</h2>
+<p>This program evaluates the student’s understanding of different data
+structures (vectors, matrices, lists, and data frames) in R and how to
+manipulate them.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="co"># 1. Create a vector of random numbers and apply operations such as sorting and searching</span></span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a></span>
+<span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># For reproducibility</span></span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>random_vector <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">100</span>) <span class="co"># Vector of 20 random numbers between 1 and 100</span></span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Original random vector:</span><span class="sc">\n</span><span class="st">&quot;</span>, random_vector, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Original random vector:
+ 91.5658 93.77047 29.32781 83.21431 64.53281 52.3905 73.92224 14.33199 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144 97.84442 12.63125 48.02471 56.47294 </code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" tabindex="-1"></a><span class="co"># Sort the vector</span></span>
+<span id="cb3-2"><a href="#cb3-2" tabindex="-1"></a>sorted_vector <span class="ot">&lt;-</span> <span class="fu">sort</span>(random_vector)</span>
+<span id="cb3-3"><a href="#cb3-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sorted vector:</span><span class="sc">\n</span><span class="st">&quot;</span>, sorted_vector, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sorted vector:
+ 12.63125 14.33199 26.28745 29.32781 46.31644 46.76699 48.02471 52.3905 56.47294 64.53281 66.04224 70.80141 72.19211 73.92224 83.21431 91.5658 93.53255 93.77047 94.06144 97.84442 </code></pre>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="co"># Search for a specific value (check if a number is present)</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>search_value <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>is_value_present <span class="ot">&lt;-</span> <span class="fu">any</span>(random_vector <span class="sc">==</span> search_value)</span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Is&quot;</span>, search_value, <span class="st">&quot;present in the vector?&quot;</span>, is_value_present, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Is 50 present in the vector? FALSE </code></pre>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="co"># Find values in the vector greater than 60</span></span>
+<span id="cb7-2"><a href="#cb7-2" tabindex="-1"></a>values_greater_than_60 <span class="ot">&lt;-</span> random_vector[random_vector <span class="sc">&gt;</span> <span class="dv">60</span>]</span>
+<span id="cb7-3"><a href="#cb7-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Values greater than 60:</span><span class="sc">\n</span><span class="st">&quot;</span>, values_greater_than_60, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Values greater than 60:
+ 91.5658 93.77047 83.21431 64.53281 73.92224 66.04224 70.80141 72.19211 93.53255 94.06144 97.84442 </code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="co"># 2. Convert the vector into a matrix and perform matrix multiplication</span></span>
+<span id="cb9-2"><a href="#cb9-2" tabindex="-1"></a></span>
+<span id="cb9-3"><a href="#cb9-3" tabindex="-1"></a><span class="co"># Create a 4x5 matrix from the vector</span></span>
+<span id="cb9-4"><a href="#cb9-4" tabindex="-1"></a>matrix_from_vector <span class="ot">&lt;-</span> <span class="fu">matrix</span>(random_vector, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb9-5"><a href="#cb9-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Matrix from vector:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Matrix from vector:</code></pre>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="fu">print</span>(matrix_from_vector)</span></code></pre></div>
+<pre><code>         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 91.56580 64.53281 66.04224 93.53255 97.84442
+[2,] 93.77047 52.39050 70.80141 26.28745 12.63125
+[3,] 29.32781 73.92224 46.31644 46.76699 48.02471
+[4,] 83.21431 14.33199 72.19211 94.06144 56.47294</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="co"># Perform matrix multiplication (matrix with its transpose)</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a>matrix_transpose <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix_from_vector)</span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a>matrix_multiplication_result <span class="ot">&lt;-</span> matrix_from_vector <span class="sc">%*%</span> matrix_transpose</span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Matrix multiplication result:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Matrix multiplication result:</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="fu">print</span>(matrix_multiplication_result)</span></code></pre></div>
+<pre><code>         [,1]     [,2]     [,3]     [,4]
+[1,] 35232.22 20337.59 19587.86 27635.57
+[2,] 20337.59 17401.08 11738.17 16851.17
+[3,] 19587.86 11738.17 12963.36 13954.70
+[4,] 27635.57 16851.17 13954.70 24378.48</code></pre>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" tabindex="-1"></a><span class="co"># Element-wise matrix multiplication (Hadamard product)</span></span>
+<span id="cb17-2"><a href="#cb17-2" tabindex="-1"></a>elementwise_multiplication_result <span class="ot">&lt;-</span> matrix_from_vector <span class="sc">*</span> matrix_from_vector</span>
+<span id="cb17-3"><a href="#cb17-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Element-wise matrix multiplication result:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Element-wise matrix multiplication result:</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" tabindex="-1"></a><span class="fu">print</span>(elementwise_multiplication_result)</span></code></pre></div>
+<pre><code>          [,1]     [,2]     [,3]      [,4]      [,5]
+[1,] 8384.2954 4164.483 4361.577 8748.3384 9573.5298
+[2,] 8792.9003 2744.764 5012.840  691.0302  159.5484
+[3,]  860.1207 5464.498 2145.212 2187.1513 2306.3729
+[4,] 6924.6222  205.406 5211.701 8847.5541 3189.1932</code></pre>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" tabindex="-1"></a><span class="co"># 3. Create a list containing different types of elements and perform subsetting</span></span>
+<span id="cb21-2"><a href="#cb21-2" tabindex="-1"></a></span>
+<span id="cb21-3"><a href="#cb21-3" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb21-4"><a href="#cb21-4" tabindex="-1"></a>  <span class="at">numbers =</span> random_vector,</span>
+<span id="cb21-5"><a href="#cb21-5" tabindex="-1"></a>  <span class="at">characters =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</span>
+<span id="cb21-6"><a href="#cb21-6" tabindex="-1"></a>  <span class="at">logical_values =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb21-7"><a href="#cb21-7" tabindex="-1"></a>  <span class="at">matrix =</span> matrix_from_vector</span>
+<span id="cb21-8"><a href="#cb21-8" tabindex="-1"></a>)</span>
+<span id="cb21-9"><a href="#cb21-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;List:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>List:</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" tabindex="-1"></a><span class="fu">print</span>(my_list)</span></code></pre></div>
+<pre><code>$numbers
+ [1] 91.56580 93.77047 29.32781 83.21431 64.53281 52.39050 73.92224 14.33199
+ [9] 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144
+[17] 97.84442 12.63125 48.02471 56.47294
 
-The triangle is: Isosceles 
-The area of the triangle is: 12
+$characters
+[1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot;
 
-Enter the lengths of the sides of the triangle:** 
-Side a: 1 
-Side b: 2
-Side c: 8
+$logical_values
+[1]  TRUE FALSE  TRUE
 
-Error: The given sides do not form a valid triangle.</code></pre>
+$matrix
+         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 91.56580 64.53281 66.04224 93.53255 97.84442
+[2,] 93.77047 52.39050 70.80141 26.28745 12.63125
+[3,] 29.32781 73.92224 46.31644 46.76699 48.02471
+[4,] 83.21431 14.33199 72.19211 94.06144 56.47294</code></pre>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" tabindex="-1"></a><span class="co"># Subsetting the list (extracting numeric and logical parts)</span></span>
+<span id="cb25-2"><a href="#cb25-2" tabindex="-1"></a>subset_numeric <span class="ot">&lt;-</span> my_list<span class="sc">$</span>numbers</span>
+<span id="cb25-3"><a href="#cb25-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Subset (numeric part of the list):</span><span class="sc">\n</span><span class="st">&quot;</span>, subset_numeric, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Subset (numeric part of the list):
+ 91.5658 93.77047 29.32781 83.21431 64.53281 52.3905 73.92224 14.33199 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144 97.84442 12.63125 48.02471 56.47294 </code></pre>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" tabindex="-1"></a>subset_logical <span class="ot">&lt;-</span> my_list<span class="sc">$</span>logical_values</span>
+<span id="cb27-2"><a href="#cb27-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Subset (logical part of the list):</span><span class="sc">\n</span><span class="st">&quot;</span>, subset_logical, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Subset (logical part of the list):
+ TRUE FALSE TRUE </code></pre>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" tabindex="-1"></a><span class="co"># Modify elements in the list (replace the second character with &quot;Z&quot;)</span></span>
+<span id="cb29-2"><a href="#cb29-2" tabindex="-1"></a>my_list<span class="sc">$</span>characters[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Z&quot;</span></span>
+<span id="cb29-3"><a href="#cb29-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Modified list of characters:</span><span class="sc">\n</span><span class="st">&quot;</span>, my_list<span class="sc">$</span>characters, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Modified list of characters:
+ A Z C D </code></pre>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" tabindex="-1"></a><span class="co"># Apply a function to the numeric part of the list (e.g., calculate the square of the numbers)</span></span>
+<span id="cb31-2"><a href="#cb31-2" tabindex="-1"></a>squared_numbers <span class="ot">&lt;-</span> my_list<span class="sc">$</span>numbers <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb31-3"><a href="#cb31-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Squared numbers:</span><span class="sc">\n</span><span class="st">&quot;</span>, squared_numbers, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Squared numbers:
+ 8384.295 8792.9 860.1207 6924.622 4164.483 2744.764 5464.498 205.406 4361.577 5012.84 2145.212 5211.701 8748.338 691.0302 2187.151 8847.554 9573.53 159.5484 2306.373 3189.193 </code></pre>
+<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" tabindex="-1"></a><span class="co"># 4. Create a data frame and perform operations such as filtering, summarizing, and handling missing values</span></span>
+<span id="cb33-2"><a href="#cb33-2" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb33-3"><a href="#cb33-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb33-4"><a href="#cb33-4" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb33-5"><a href="#cb33-5" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">65</span>, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb33-6"><a href="#cb33-6" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">runif</span>(<span class="dv">20</span>, <span class="at">min =</span> <span class="dv">50</span>, <span class="at">max =</span> <span class="dv">100</span>),</span>
+<span id="cb33-7"><a href="#cb33-7" tabindex="-1"></a>  <span class="at">Passed =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb33-8"><a href="#cb33-8" tabindex="-1"></a>)</span>
+<span id="cb33-9"><a href="#cb33-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame:</code></pre>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 71.58756  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 80.94191   TRUE
+10 10  22 66.67136  FALSE
+11 11  37 67.33741   TRUE
+12 12  51 69.92427  FALSE
+13 13  45 89.23464  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" tabindex="-1"></a><span class="co"># Filter the data frame (rows where Age &gt; 30 and Score &gt; 70)</span></span>
+<span id="cb37-2"><a href="#cb37-2" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Age <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> Score <span class="sc">&gt;</span> <span class="dv">70</span>)</span>
+<span id="cb37-3"><a href="#cb37-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtered data frame (Age &gt; 30 and Score &gt; 70):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Filtered data frame (Age &gt; 30 and Score &gt; 70):</code></pre>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb39-1"><a href="#cb39-1" tabindex="-1"></a><span class="fu">print</span>(filtered_df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 71.58756  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 80.94191   TRUE
+13 13  45 89.23464  FALSE
+16 16  50 83.86384   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="#cb41-1" tabindex="-1"></a><span class="co"># Calculate mean, sum, and variance of numerical columns (Age and Score)</span></span>
+<span id="cb41-2"><a href="#cb41-2" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb41-3"><a href="#cb41-3" tabindex="-1"></a>sum_age <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb41-4"><a href="#cb41-4" tabindex="-1"></a>var_age <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb41-5"><a href="#cb41-5" tabindex="-1"></a></span>
+<span id="cb41-6"><a href="#cb41-6" tabindex="-1"></a>mean_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb41-7"><a href="#cb41-7" tabindex="-1"></a>sum_score <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb41-8"><a href="#cb41-8" tabindex="-1"></a>var_score <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb41-9"><a href="#cb41-9" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Summary statistics for Age column:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Summary statistics for Age column:</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean Age:&quot;</span>, mean_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Mean Age: 46.7 </code></pre>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="#cb45-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sum of Age:&quot;</span>, sum_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sum of Age: 934 </code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Variance of Age:&quot;</span>, var_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Variance of Age: 179.6947 </code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Summary statistics for Score column:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Summary statistics for Score column:</code></pre>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean Score:&quot;</span>, mean_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Mean Score: 77.26086 </code></pre>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sum of Score:&quot;</span>, sum_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sum of Score: 1545.217 </code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Variance of Score:&quot;</span>, var_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Variance of Score: 219.2162 </code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" tabindex="-1"></a><span class="co"># 5. Handling missing values in the data frame</span></span>
+<span id="cb57-2"><a href="#cb57-2" tabindex="-1"></a></span>
+<span id="cb57-3"><a href="#cb57-3" tabindex="-1"></a><span class="co"># Introduce some NA values in the Score column</span></span>
+<span id="cb57-4"><a href="#cb57-4" tabindex="-1"></a>df<span class="sc">$</span>Score[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb57-5"><a href="#cb57-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame with missing values:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame with missing values:</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42       NA  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62       NA   TRUE
+10 10  22       NA  FALSE
+11 11  37 67.33741   TRUE
+12 12  51       NA  FALSE
+13 13  45       NA  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" tabindex="-1"></a><span class="co"># Replace NA values with the mean of the Score column</span></span>
+<span id="cb61-2"><a href="#cb61-2" tabindex="-1"></a>df<span class="sc">$</span>Score[<span class="fu">is.na</span>(df<span class="sc">$</span>Score)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb61-3"><a href="#cb61-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame after imputation of missing values:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame after imputation of missing values:</code></pre>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="#cb63-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 77.79050  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 77.79050   TRUE
+10 10  22 77.79050  FALSE
+11 11  37 67.33741   TRUE
+12 12  51 77.79050  FALSE
+13 13  45 77.79050  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="#cb65-1" tabindex="-1"></a><span class="co"># Grouping the data by Passed status and calculating group-wise statistics</span></span>
+<span id="cb65-2"><a href="#cb65-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="#cb69-1" tabindex="-1"></a>grouped_stats <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb69-2"><a href="#cb69-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Passed) <span class="sc">%&gt;%</span></span>
+<span id="cb69-3"><a href="#cb69-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb69-4"><a href="#cb69-4" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb69-5"><a href="#cb69-5" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(Age)</span>
+<span id="cb69-6"><a href="#cb69-6" tabindex="-1"></a>  )</span>
+<span id="cb69-7"><a href="#cb69-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Grouped statistics by Passed status:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Grouped statistics by Passed status:</code></pre>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="#cb71-1" tabindex="-1"></a><span class="fu">print</span>(grouped_stats)</span></code></pre></div>
+<pre><code># A tibble: 2 × 3
+  Passed mean_score mean_age
+  &lt;lgl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+1 FALSE        80.6     44.9
+2 TRUE         72.6     50  </code></pre>
 </div>
 
 

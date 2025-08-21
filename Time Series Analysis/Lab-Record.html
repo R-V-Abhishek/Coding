@@ -13,7 +13,7 @@
 
 <meta name="date" content="2025-08-13" />
 
-<title>Lab Program - 1</title>
+<title>Lab Record</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -421,15 +421,16 @@ display: none;
 
 
 
-<h1 class="title toc-ignore"><strong>Lab Program - 1</strong></h1>
+<h1 class="title toc-ignore"><strong>Lab Record</strong></h1>
 <h4 class="author"><strong>R V Abhishek</strong></h4>
 <h4 class="date">2025-08-13</h4>
 
 </div>
 
 
-<p>Program to check what type of Triangle given 3 sides, and calculate
-its area</p>
+<div id="lab-program-1---program-to-check-what-type-of-triangle-given-3-sides-and-calculate-its-area" class="section level1">
+<h1>Lab Program 1 - Program to check what type of Triangle given 3
+sides, and calculate its area</h1>
 <p>This R program validates the sides of the triangle (taken as input
 from the user) and then if valid, calculates the area of the triangle
 using Heron’s formula and checks what type of triangle it is</p>
@@ -511,6 +512,268 @@ Side b: 2
 Side c: 8
 
 Error: The given sides do not form a valid triangle.</code></pre>
+</div>
+</div>
+<div id="lab-program-2-creating-and-manipulating-data-structures" class="section level1">
+<h1>Lab-Program 2: Creating and Manipulating Data Structures</h1>
+<p>This program evaluates the student’s understanding of different data
+structures (vectors, matrices, lists, and data frames) in R and how to
+manipulate them.</p>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="co"># 1. Create a vector of random numbers and apply operations such as sorting and searching</span></span>
+<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a></span>
+<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a><span class="fu">set.seed</span>(<span class="dv">42</span>) <span class="co"># For reproducibility</span></span>
+<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a>random_vector <span class="ot">&lt;-</span> <span class="fu">runif</span>(<span class="dv">20</span>, <span class="at">min =</span> <span class="dv">1</span>, <span class="at">max =</span> <span class="dv">100</span>) <span class="co"># Vector of 20 random numbers between 1 and 100</span></span>
+<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Original random vector:</span><span class="sc">\n</span><span class="st">&quot;</span>, random_vector, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Original random vector:
+ 91.5658 93.77047 29.32781 83.21431 64.53281 52.3905 73.92224 14.33199 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144 97.84442 12.63125 48.02471 56.47294 </code></pre>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="co"># Sort the vector</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a>sorted_vector <span class="ot">&lt;-</span> <span class="fu">sort</span>(random_vector)</span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sorted vector:</span><span class="sc">\n</span><span class="st">&quot;</span>, sorted_vector, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sorted vector:
+ 12.63125 14.33199 26.28745 29.32781 46.31644 46.76699 48.02471 52.3905 56.47294 64.53281 66.04224 70.80141 72.19211 73.92224 83.21431 91.5658 93.53255 93.77047 94.06144 97.84442 </code></pre>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" tabindex="-1"></a><span class="co"># Search for a specific value (check if a number is present)</span></span>
+<span id="cb20-2"><a href="#cb20-2" tabindex="-1"></a>search_value <span class="ot">&lt;-</span> <span class="dv">50</span></span>
+<span id="cb20-3"><a href="#cb20-3" tabindex="-1"></a>is_value_present <span class="ot">&lt;-</span> <span class="fu">any</span>(random_vector <span class="sc">==</span> search_value)</span>
+<span id="cb20-4"><a href="#cb20-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Is&quot;</span>, search_value, <span class="st">&quot;present in the vector?&quot;</span>, is_value_present, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Is 50 present in the vector? FALSE </code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" tabindex="-1"></a><span class="co"># Find values in the vector greater than 60</span></span>
+<span id="cb22-2"><a href="#cb22-2" tabindex="-1"></a>values_greater_than_60 <span class="ot">&lt;-</span> random_vector[random_vector <span class="sc">&gt;</span> <span class="dv">60</span>]</span>
+<span id="cb22-3"><a href="#cb22-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Values greater than 60:</span><span class="sc">\n</span><span class="st">&quot;</span>, values_greater_than_60, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Values greater than 60:
+ 91.5658 93.77047 83.21431 64.53281 73.92224 66.04224 70.80141 72.19211 93.53255 94.06144 97.84442 </code></pre>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" tabindex="-1"></a><span class="co"># 2. Convert the vector into a matrix and perform matrix multiplication</span></span>
+<span id="cb24-2"><a href="#cb24-2" tabindex="-1"></a></span>
+<span id="cb24-3"><a href="#cb24-3" tabindex="-1"></a><span class="co"># Create a 4x5 matrix from the vector</span></span>
+<span id="cb24-4"><a href="#cb24-4" tabindex="-1"></a>matrix_from_vector <span class="ot">&lt;-</span> <span class="fu">matrix</span>(random_vector, <span class="at">nrow =</span> <span class="dv">4</span>, <span class="at">ncol =</span> <span class="dv">5</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Matrix from vector:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Matrix from vector:</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" tabindex="-1"></a><span class="fu">print</span>(matrix_from_vector)</span></code></pre></div>
+<pre><code>         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 91.56580 64.53281 66.04224 93.53255 97.84442
+[2,] 93.77047 52.39050 70.80141 26.28745 12.63125
+[3,] 29.32781 73.92224 46.31644 46.76699 48.02471
+[4,] 83.21431 14.33199 72.19211 94.06144 56.47294</code></pre>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" tabindex="-1"></a><span class="co"># Perform matrix multiplication (matrix with its transpose)</span></span>
+<span id="cb28-2"><a href="#cb28-2" tabindex="-1"></a>matrix_transpose <span class="ot">&lt;-</span> <span class="fu">t</span>(matrix_from_vector)</span>
+<span id="cb28-3"><a href="#cb28-3" tabindex="-1"></a>matrix_multiplication_result <span class="ot">&lt;-</span> matrix_from_vector <span class="sc">%*%</span> matrix_transpose</span>
+<span id="cb28-4"><a href="#cb28-4" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Matrix multiplication result:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Matrix multiplication result:</code></pre>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" tabindex="-1"></a><span class="fu">print</span>(matrix_multiplication_result)</span></code></pre></div>
+<pre><code>         [,1]     [,2]     [,3]     [,4]
+[1,] 35232.22 20337.59 19587.86 27635.57
+[2,] 20337.59 17401.08 11738.17 16851.17
+[3,] 19587.86 11738.17 12963.36 13954.70
+[4,] 27635.57 16851.17 13954.70 24378.48</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" tabindex="-1"></a><span class="co"># Element-wise matrix multiplication (Hadamard product)</span></span>
+<span id="cb32-2"><a href="#cb32-2" tabindex="-1"></a>elementwise_multiplication_result <span class="ot">&lt;-</span> matrix_from_vector <span class="sc">*</span> matrix_from_vector</span>
+<span id="cb32-3"><a href="#cb32-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Element-wise matrix multiplication result:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Element-wise matrix multiplication result:</code></pre>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" tabindex="-1"></a><span class="fu">print</span>(elementwise_multiplication_result)</span></code></pre></div>
+<pre><code>          [,1]     [,2]     [,3]      [,4]      [,5]
+[1,] 8384.2954 4164.483 4361.577 8748.3384 9573.5298
+[2,] 8792.9003 2744.764 5012.840  691.0302  159.5484
+[3,]  860.1207 5464.498 2145.212 2187.1513 2306.3729
+[4,] 6924.6222  205.406 5211.701 8847.5541 3189.1932</code></pre>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" tabindex="-1"></a><span class="co"># 3. Create a list containing different types of elements and perform subsetting</span></span>
+<span id="cb36-2"><a href="#cb36-2" tabindex="-1"></a></span>
+<span id="cb36-3"><a href="#cb36-3" tabindex="-1"></a>my_list <span class="ot">&lt;-</span> <span class="fu">list</span>(</span>
+<span id="cb36-4"><a href="#cb36-4" tabindex="-1"></a>  <span class="at">numbers =</span> random_vector,</span>
+<span id="cb36-5"><a href="#cb36-5" tabindex="-1"></a>  <span class="at">characters =</span> <span class="fu">c</span>(<span class="st">&quot;A&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;C&quot;</span>, <span class="st">&quot;D&quot;</span>),</span>
+<span id="cb36-6"><a href="#cb36-6" tabindex="-1"></a>  <span class="at">logical_values =</span> <span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>),</span>
+<span id="cb36-7"><a href="#cb36-7" tabindex="-1"></a>  <span class="at">matrix =</span> matrix_from_vector</span>
+<span id="cb36-8"><a href="#cb36-8" tabindex="-1"></a>)</span>
+<span id="cb36-9"><a href="#cb36-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;List:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>List:</code></pre>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" tabindex="-1"></a><span class="fu">print</span>(my_list)</span></code></pre></div>
+<pre><code>$numbers
+ [1] 91.56580 93.77047 29.32781 83.21431 64.53281 52.39050 73.92224 14.33199
+ [9] 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144
+[17] 97.84442 12.63125 48.02471 56.47294
+
+$characters
+[1] &quot;A&quot; &quot;B&quot; &quot;C&quot; &quot;D&quot;
+
+$logical_values
+[1]  TRUE FALSE  TRUE
+
+$matrix
+         [,1]     [,2]     [,3]     [,4]     [,5]
+[1,] 91.56580 64.53281 66.04224 93.53255 97.84442
+[2,] 93.77047 52.39050 70.80141 26.28745 12.63125
+[3,] 29.32781 73.92224 46.31644 46.76699 48.02471
+[4,] 83.21431 14.33199 72.19211 94.06144 56.47294</code></pre>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" tabindex="-1"></a><span class="co"># Subsetting the list (extracting numeric and logical parts)</span></span>
+<span id="cb40-2"><a href="#cb40-2" tabindex="-1"></a>subset_numeric <span class="ot">&lt;-</span> my_list<span class="sc">$</span>numbers</span>
+<span id="cb40-3"><a href="#cb40-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Subset (numeric part of the list):</span><span class="sc">\n</span><span class="st">&quot;</span>, subset_numeric, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Subset (numeric part of the list):
+ 91.5658 93.77047 29.32781 83.21431 64.53281 52.3905 73.92224 14.33199 66.04224 70.80141 46.31644 72.19211 93.53255 26.28745 46.76699 94.06144 97.84442 12.63125 48.02471 56.47294 </code></pre>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" tabindex="-1"></a>subset_logical <span class="ot">&lt;-</span> my_list<span class="sc">$</span>logical_values</span>
+<span id="cb42-2"><a href="#cb42-2" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Subset (logical part of the list):</span><span class="sc">\n</span><span class="st">&quot;</span>, subset_logical, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Subset (logical part of the list):
+ TRUE FALSE TRUE </code></pre>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" tabindex="-1"></a><span class="co"># Modify elements in the list (replace the second character with &quot;Z&quot;)</span></span>
+<span id="cb44-2"><a href="#cb44-2" tabindex="-1"></a>my_list<span class="sc">$</span>characters[<span class="dv">2</span>] <span class="ot">&lt;-</span> <span class="st">&quot;Z&quot;</span></span>
+<span id="cb44-3"><a href="#cb44-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Modified list of characters:</span><span class="sc">\n</span><span class="st">&quot;</span>, my_list<span class="sc">$</span>characters, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Modified list of characters:
+ A Z C D </code></pre>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" tabindex="-1"></a><span class="co"># Apply a function to the numeric part of the list (e.g., calculate the square of the numbers)</span></span>
+<span id="cb46-2"><a href="#cb46-2" tabindex="-1"></a>squared_numbers <span class="ot">&lt;-</span> my_list<span class="sc">$</span>numbers <span class="sc">^</span> <span class="dv">2</span></span>
+<span id="cb46-3"><a href="#cb46-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Squared numbers:</span><span class="sc">\n</span><span class="st">&quot;</span>, squared_numbers, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Squared numbers:
+ 8384.295 8792.9 860.1207 6924.622 4164.483 2744.764 5464.498 205.406 4361.577 5012.84 2145.212 5211.701 8748.338 691.0302 2187.151 8847.554 9573.53 159.5484 2306.373 3189.193 </code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="#cb48-1" tabindex="-1"></a><span class="co"># 4. Create a data frame and perform operations such as filtering, summarizing, and handling missing values</span></span>
+<span id="cb48-2"><a href="#cb48-2" tabindex="-1"></a><span class="co"># Create a data frame</span></span>
+<span id="cb48-3"><a href="#cb48-3" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb48-4"><a href="#cb48-4" tabindex="-1"></a>  <span class="at">ID =</span> <span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>,</span>
+<span id="cb48-5"><a href="#cb48-5" tabindex="-1"></a>  <span class="at">Age =</span> <span class="fu">sample</span>(<span class="dv">18</span><span class="sc">:</span><span class="dv">65</span>, <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb48-6"><a href="#cb48-6" tabindex="-1"></a>  <span class="at">Score =</span> <span class="fu">runif</span>(<span class="dv">20</span>, <span class="at">min =</span> <span class="dv">50</span>, <span class="at">max =</span> <span class="dv">100</span>),</span>
+<span id="cb48-7"><a href="#cb48-7" tabindex="-1"></a>  <span class="at">Passed =</span> <span class="fu">sample</span>(<span class="fu">c</span>(<span class="cn">TRUE</span>, <span class="cn">FALSE</span>), <span class="dv">20</span>, <span class="at">replace =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb48-8"><a href="#cb48-8" tabindex="-1"></a>)</span>
+<span id="cb48-9"><a href="#cb48-9" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame:</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="#cb50-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 71.58756  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 80.94191   TRUE
+10 10  22 66.67136  FALSE
+11 11  37 67.33741   TRUE
+12 12  51 69.92427  FALSE
+13 13  45 89.23464  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="#cb52-1" tabindex="-1"></a><span class="co"># Filter the data frame (rows where Age &gt; 30 and Score &gt; 70)</span></span>
+<span id="cb52-2"><a href="#cb52-2" tabindex="-1"></a>filtered_df <span class="ot">&lt;-</span> <span class="fu">subset</span>(df, Age <span class="sc">&gt;</span> <span class="dv">30</span> <span class="sc">&amp;</span> Score <span class="sc">&gt;</span> <span class="dv">70</span>)</span>
+<span id="cb52-3"><a href="#cb52-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Filtered data frame (Age &gt; 30 and Score &gt; 70):</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Filtered data frame (Age &gt; 30 and Score &gt; 70):</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="#cb54-1" tabindex="-1"></a><span class="fu">print</span>(filtered_df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 71.58756  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 80.94191   TRUE
+13 13  45 89.23464  FALSE
+16 16  50 83.86384   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="#cb56-1" tabindex="-1"></a><span class="co"># Calculate mean, sum, and variance of numerical columns (Age and Score)</span></span>
+<span id="cb56-2"><a href="#cb56-2" tabindex="-1"></a>mean_age <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb56-3"><a href="#cb56-3" tabindex="-1"></a>sum_age <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb56-4"><a href="#cb56-4" tabindex="-1"></a>var_age <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>Age)</span>
+<span id="cb56-5"><a href="#cb56-5" tabindex="-1"></a></span>
+<span id="cb56-6"><a href="#cb56-6" tabindex="-1"></a>mean_score <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb56-7"><a href="#cb56-7" tabindex="-1"></a>sum_score <span class="ot">&lt;-</span> <span class="fu">sum</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb56-8"><a href="#cb56-8" tabindex="-1"></a>var_score <span class="ot">&lt;-</span> <span class="fu">var</span>(df<span class="sc">$</span>Score)</span>
+<span id="cb56-9"><a href="#cb56-9" tabindex="-1"></a></span>
+<span id="cb56-10"><a href="#cb56-10" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Summary statistics for Age column:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Summary statistics for Age column:</code></pre>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="#cb58-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean Age:&quot;</span>, mean_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Mean Age: 46.7 </code></pre>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="#cb60-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sum of Age:&quot;</span>, sum_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sum of Age: 934 </code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="#cb62-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Variance of Age:&quot;</span>, var_age, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Variance of Age: 179.6947 </code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="#cb64-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Summary statistics for Score column:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Summary statistics for Score column:</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="#cb66-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Mean Score:&quot;</span>, mean_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Mean Score: 77.26086 </code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="#cb68-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Sum of Score:&quot;</span>, sum_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Sum of Score: 1545.217 </code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="#cb70-1" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Variance of Score:&quot;</span>, var_score, <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Variance of Score: 219.2162 </code></pre>
+<div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="#cb72-1" tabindex="-1"></a><span class="co"># 5. Handling missing values in the data frame</span></span>
+<span id="cb72-2"><a href="#cb72-2" tabindex="-1"></a></span>
+<span id="cb72-3"><a href="#cb72-3" tabindex="-1"></a><span class="co"># Introduce some NA values in the Score column</span></span>
+<span id="cb72-4"><a href="#cb72-4" tabindex="-1"></a>df<span class="sc">$</span>Score[<span class="fu">sample</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">20</span>, <span class="dv">5</span>)] <span class="ot">&lt;-</span> <span class="cn">NA</span></span>
+<span id="cb72-5"><a href="#cb72-5" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame with missing values:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame with missing values:</code></pre>
+<div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="#cb74-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42       NA  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62       NA   TRUE
+10 10  22       NA  FALSE
+11 11  37 67.33741   TRUE
+12 12  51       NA  FALSE
+13 13  45       NA  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="#cb76-1" tabindex="-1"></a><span class="co"># Replace NA values with the mean of the Score column</span></span>
+<span id="cb76-2"><a href="#cb76-2" tabindex="-1"></a>df<span class="sc">$</span>Score[<span class="fu">is.na</span>(df<span class="sc">$</span>Score)] <span class="ot">&lt;-</span> <span class="fu">mean</span>(df<span class="sc">$</span>Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)</span>
+<span id="cb76-3"><a href="#cb76-3" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Data frame after imputation of missing values:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Data frame after imputation of missing values:</code></pre>
+<div class="sourceCode" id="cb78"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb78-1"><a href="#cb78-1" tabindex="-1"></a><span class="fu">print</span>(df)</span></code></pre></div>
+<pre><code>   ID Age    Score Passed
+1   1  64 71.78858  FALSE
+2   2  20 51.87155  FALSE
+3   3  58 98.67700  FALSE
+4   4  42 77.79050  FALSE
+5   5  44 97.87883  FALSE
+6   6  53 94.38775  FALSE
+7   7  54 81.99894   TRUE
+8   8  48 98.54833  FALSE
+9   9  62 77.79050   TRUE
+10 10  22 77.79050  FALSE
+11 11  37 67.33741   TRUE
+12 12  51 77.79050  FALSE
+13 13  45 77.79050  FALSE
+14 14  57 51.94682  FALSE
+15 15  20 87.43977  FALSE
+16 16  50 83.86384   TRUE
+17 17  59 58.56322   TRUE
+18 18  41 63.05440   TRUE
+19 19  47 75.72065   TRUE
+20 20  60 83.78036  FALSE</code></pre>
+<div class="sourceCode" id="cb80"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb80-1"><a href="#cb80-1" tabindex="-1"></a><span class="co"># Grouping the data by Passed status and calculating group-wise statistics</span></span>
+<span id="cb80-2"><a href="#cb80-2" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span></code></pre></div>
+<pre><code>
+Attaching package: &#39;dplyr&#39;</code></pre>
+<pre><code>The following objects are masked from &#39;package:stats&#39;:
+
+    filter, lag</code></pre>
+<pre><code>The following objects are masked from &#39;package:base&#39;:
+
+    intersect, setdiff, setequal, union</code></pre>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb84-1"><a href="#cb84-1" tabindex="-1"></a>grouped_stats <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span></span>
+<span id="cb84-2"><a href="#cb84-2" tabindex="-1"></a>  <span class="fu">group_by</span>(Passed) <span class="sc">%&gt;%</span></span>
+<span id="cb84-3"><a href="#cb84-3" tabindex="-1"></a>  <span class="fu">summarise</span>(</span>
+<span id="cb84-4"><a href="#cb84-4" tabindex="-1"></a>    <span class="at">mean_score =</span> <span class="fu">mean</span>(Score, <span class="at">na.rm =</span> <span class="cn">TRUE</span>),</span>
+<span id="cb84-5"><a href="#cb84-5" tabindex="-1"></a>    <span class="at">mean_age =</span> <span class="fu">mean</span>(Age)</span>
+<span id="cb84-6"><a href="#cb84-6" tabindex="-1"></a>  )</span>
+<span id="cb84-7"><a href="#cb84-7" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Grouped statistics by Passed status:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span></code></pre></div>
+<pre><code>Grouped statistics by Passed status:</code></pre>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb86-1"><a href="#cb86-1" tabindex="-1"></a><span class="fu">print</span>(grouped_stats)</span></code></pre></div>
+<pre><code># A tibble: 2 × 3
+  Passed mean_score mean_age
+  &lt;lgl&gt;       &lt;dbl&gt;    &lt;dbl&gt;
+1 FALSE        80.6     44.9
+2 TRUE         72.6     50  </code></pre>
 </div>
 
 

@@ -1,0 +1,152 @@
+---
+title: "**Lab Program - 2**"
+author: "**R V Abhishek**"
+date: "2025-08-20"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies: ["fancyhdr", "graphicx"]
+  html_document:
+    theme: "cerulean"
+    highlight: "tango"
+    number_lines: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+## Lab-Program 2: Creating and Manipulating Data Structures
+This program evaluates the student’s understanding of different data structures (vectors, matrices, lists, and data frames) in R and how to manipulate them.
+
+```{r}
+# 1. Create a vector of random numbers and apply operations such as sorting and searching
+
+set.seed(42) # For reproducibility
+random_vector <- runif(20, min = 1, max = 100) # Vector of 20 random numbers between 1 and 100
+cat("Original random vector:\n", random_vector, "\n")
+
+# Sort the vector
+sorted_vector <- sort(random_vector)
+cat("Sorted vector:\n", sorted_vector, "\n")
+
+# Search for a specific value (check if a number is present)
+search_value <- 50
+is_value_present <- any(random_vector == search_value)
+cat("Is", search_value, "present in the vector?", is_value_present, "\n")
+
+# Find values in the vector greater than 60
+values_greater_than_60 <- random_vector[random_vector > 60]
+cat("Values greater than 60:\n", values_greater_than_60, "\n")
+```
+
+```{r}
+# 2. Convert the vector into a matrix and perform matrix multiplication
+
+# Create a 4x5 matrix from the vector
+matrix_from_vector <- matrix(random_vector, nrow = 4, ncol = 5)
+cat("Matrix from vector:\n")
+print(matrix_from_vector)
+
+# Perform matrix multiplication (matrix with its transpose)
+matrix_transpose <- t(matrix_from_vector)
+matrix_multiplication_result <- matrix_from_vector %*% matrix_transpose
+cat("Matrix multiplication result:\n")
+print(matrix_multiplication_result)
+
+# Element-wise matrix multiplication (Hadamard product)
+elementwise_multiplication_result <- matrix_from_vector * matrix_from_vector
+cat("Element-wise matrix multiplication result:\n")
+print(elementwise_multiplication_result)
+```
+
+```{r}
+# 3. Create a list containing different types of elements and perform subsetting
+
+my_list <- list(
+  numbers = random_vector,
+  characters = c("A", "B", "C", "D"),
+  logical_values = c(TRUE, FALSE, TRUE),
+  matrix = matrix_from_vector
+)
+cat("List:\n")
+print(my_list)
+
+# Subsetting the list (extracting numeric and logical parts)
+subset_numeric <- my_list$numbers
+cat("Subset (numeric part of the list):\n", subset_numeric, "\n")
+
+subset_logical <- my_list$logical_values
+cat("Subset (logical part of the list):\n", subset_logical, "\n")
+
+# Modify elements in the list (replace the second character with "Z")
+my_list$characters[2] <- "Z"
+cat("Modified list of characters:\n", my_list$characters, "\n")
+
+# Apply a function to the numeric part of the list (e.g., calculate the square of the numbers)
+squared_numbers <- my_list$numbers ^ 2
+cat("Squared numbers:\n", squared_numbers, "\n")
+```
+
+```{r}
+# 4. Create a data frame and perform operations such as filtering, summarizing, and handling missing values
+# Create a data frame
+df <- data.frame(
+  ID = 1:20,
+  Age = sample(18:65, 20, replace = TRUE),
+  Score = runif(20, min = 50, max = 100),
+  Passed = sample(c(TRUE, FALSE), 20, replace = TRUE)
+)
+cat("Data frame:\n")
+print(df)
+
+# Filter the data frame (rows where Age > 30 and Score > 70)
+filtered_df <- subset(df, Age > 30 & Score > 70)
+cat("Filtered data frame (Age > 30 and Score > 70):\n")
+print(filtered_df)
+
+# Calculate mean, sum, and variance of numerical columns (Age and Score)
+mean_age <- mean(df$Age)
+sum_age <- sum(df$Age)
+var_age <- var(df$Age)
+
+mean_score <- mean(df$Score)
+sum_score <- sum(df$Score)
+var_score <- var(df$Score)
+
+cat("Summary statistics for Age column:\n")
+cat("Mean Age:", mean_age, "\n")
+cat("Sum of Age:", sum_age, "\n")
+cat("Variance of Age:", var_age, "\n")
+
+cat("Summary statistics for Score column:\n")
+cat("Mean Score:", mean_score, "\n")
+cat("Sum of Score:", sum_score, "\n")
+cat("Variance of Score:", var_score, "\n")
+```
+
+```{r}
+# 5. Handling missing values in the data frame
+
+# Introduce some NA values in the Score column
+df$Score[sample(1:20, 5)] <- NA
+cat("Data frame with missing values:\n")
+print(df)
+
+# Replace NA values with the mean of the Score column
+df$Score[is.na(df$Score)] <- mean(df$Score, na.rm = TRUE)
+cat("Data frame after imputation of missing values:\n")
+print(df)
+
+# Grouping the data by Passed status and calculating group-wise statistics
+library(dplyr)
+grouped_stats <- df %>%
+  group_by(Passed) %>%
+  summarise(
+    mean_score = mean(Score, na.rm = TRUE),
+    mean_age = mean(Age)
+  )
+cat("Grouped statistics by Passed status:\n")
+print(grouped_stats)
+```
