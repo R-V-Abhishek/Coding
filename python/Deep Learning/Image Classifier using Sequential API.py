@@ -46,7 +46,31 @@ model = tf.keras.Sequential([
     tf.keras.layers.Dense(10, activation='softmax')
 ])
 
+print(model.summary())
+print(model.layers)
+
+hidden1=model.layers[1]
+print(hidden1.name)
+
+weights, biases = hidden1.get_weights()
+print(weights)
+print(biases)
+print(biases.shape)
+
 # Compile the model
-model.compile(optimizer='adam',
+model.compile(optimizer='sgd',
               loss='sparse_categorical_crossentropy',
-              metrics=['accuracy'])
+              metrics=['accuracy']
+)
+
+history = model.fit(train_images2, train_labels2, epochs = 30, 
+                    validation_data = (val_images, val_labels)
+ )
+
+import matplotlib.pyplot as plt
+import pandas as pd
+
+pd.DataFrame(history.history).plot(figsize = (8,5))
+plt.grid(True)
+plt.gca().set_ylim(0,1)
+plt.show

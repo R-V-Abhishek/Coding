@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
 knitr::opts_chunk$set(comment = "")
 ```
 
-# Lab Program 1 - Program to check what type of Triangle given 3 sides, and calculate its area
+# Lab Program - 1: Program to check what type of Triangle given 3 sides, and calculate its area
 
 This R program validates the sides of the triangle (taken as input from the user) and then if valid, calculates the area of the triangle using Heron's formula and checks what type of triangle it is
 
@@ -115,7 +115,7 @@ Side c: 8
 Error: The given sides do not form a valid triangle.
 ```
 
-# Lab-Program 2: Creating and Manipulating Data Structures
+# Lab Program - 2: Creating and Manipulating Data Structures
 This program evaluates the student’s understanding of different data structures (vectors, matrices, lists, and data frames) in R and how to manipulate them.
 
 ```{r}
@@ -123,11 +123,13 @@ This program evaluates the student’s understanding of different data structure
 
 set.seed(42) # For reproducibility
 random_vector <- runif(20, min = 1, max = 100) # Vector of 20 random numbers between 1 and 100
-cat("Original random vector:\n", random_vector, "\n")
+cat("Original random vector:\n")
+print(random_vector)
 
 # Sort the vector
 sorted_vector <- sort(random_vector)
-cat("Sorted vector:\n", sorted_vector, "\n")
+cat("Sorted vector:\n")
+print(sorted_vector)
 
 # Search for a specific value (check if a number is present)
 search_value <- 50
@@ -136,7 +138,8 @@ cat("Is", search_value, "present in the vector?", is_value_present, "\n")
 
 # Find values in the vector greater than 60
 values_greater_than_60 <- random_vector[random_vector > 60]
-cat("Values greater than 60:\n", values_greater_than_60, "\n")
+cat("Values greater than 60:\n")
+print(values_greater_than_60)
 ```
 
 ```{r}
@@ -248,3 +251,135 @@ grouped_stats <- df %>%
 cat("Grouped statistics by Passed status:\n")
 print(grouped_stats)
 ```
+
+## Lab Program - 3: Basic Statistical Operations on Open-Source Datasets
+
+*Objective:* This program emphasizes the application of statistical concepts on real-world datasets and visualization of the data.
+
+```{r}
+# Load necessary
+library(dplyr)  # For data manipulation
+library(ggplot2)  # For visualization
+library(moments)  # For skewness and kurtosis
+library(palmerpenguins) # For Palmer Penguins dataset
+
+data(iris)  # Load Iris dataset
+
+data(penguins)  # Load Palmer Penguins
+
+```
+
+```{r}
+# Function to calculate mode
+calc_mode <- function(x) {
+  return (as.numeric (names (sort (table (x), decreasing = TRUE)) [1] ))
+}
+```
+
+```{r}
+# Perform Statistical Analysis on Iris Dataset
+print("----- Iris Dataset Analysis -----")
+# Mean
+iris_mean <- sapply (iris[, 1:4], mean, na.rm = TRUE )
+print(paste("Mean of Iris dataset : ", iris_mean))
+
+#Median
+iris_median <- sapply(iris[, 1:4], median, na.rm = TRUE )
+print(paste("Median of Iris dataset : ", iris_median))
+
+#Mode
+iris_mode <- sapply(iris[, 1:4], calc_mode )
+print(paste("Mode of Iris dataset : ", iris_median))
+
+#Variance
+iris_variance <- sapply(iris[, 1:4], var, na.rm = TRUE )
+print(paste("Variance of Iris dataset : ", iris_variance))
+
+#Standard Deviation
+iris_sd <- sapply(iris[, 1:4], sd, na.rm = TRUE )
+print(paste("Standard Deviation of Iris dataset : ", iris_sd))
+
+#Skewness
+iris_skewness <- sapply(iris[, 1:4], skewness, na.rm = TRUE )
+print(paste("Skewness of Iris dataset : ", iris_skewness))
+```
+
+```{r}
+# Hypothesis Testing (t-test) between Sepal.Length of Setosa and Versicolor
+setosa <- subset(iris, Species == "setosa")$Sepal.Length
+versicolor <- subset(iris, Species == "versicolor")$Sepal.Length
+t_test <- t.test(setosa, versicolor)
+print(t_test)
+```
+
+```{r}
+# Visualization of Iris Dataset
+# Histogram for Sepal.Length
+ggplot(iris, aes(x = Sepal.Length)) +
+  geom_histogram(binwidth = 0.3, fill = "blue", color = "black") +
+  ggtitle("Histogram of Sepal Length in Iris Dataset")
+
+# Boxplot for Sepal.Length across Species
+ggplot(iris, aes(x = Species, y = Sepal.Length, fill = Species)) +
+  geom_boxplot() +
+  ggtitle("Boxplot of Sepal Length by Species in Iris Dataset")
+```
+
+```{r}
+print("----- Palmer Penguins Dataset Analysis -----")
+
+# Remove rows with missing values
+penguins_clean <- na.omit(penguins)
+
+# Mean
+penguins_mean <- sapply(penguins_clean[, 3:6], mean, na.rm = TRUE)
+print(paste("Mean of Palmer Penguins dataset:", penguins_mean))
+
+# Median
+penguins_median <- sapply(penguins_clean[, 3:6], median, na.rm = TRUE)
+print(paste("Median of Palmer Penguins dataset:", penguins_median))
+
+# Mode
+penguins_mode <- sapply(penguins_clean[, 3:6], calc_mode)
+print(paste("Mode of Palmer Penguins dataset:", penguins_mode))
+
+# Variance
+penguins_variance <- sapply(penguins_clean[, 3:6], var, na.rm = TRUE)
+print(paste("Variance of Palmer Penguins dataset:", penguins_variance))
+
+# Standard Deviation
+penguins_sd <- sapply(penguins_clean[, 3:6], sd, na.rm = TRUE)
+print(paste("Standard Deviation of Palmer Penguins dataset:", penguins_sd))
+
+# Skewness
+penguins_skewness <- sapply(penguins_clean[, 3:6], skewness, na.rm = TRUE)
+print(paste("Skewness of Palmer Penguins dataset:", penguins_skewness))
+
+# Kurtosis
+penguins_kurtosis <- sapply(penguins_clean[, 3:6], kurtosis, na.rm = TRUE)
+print(paste("Kurtosis of Palmer Penguins dataset:", penguins_kurtosis))
+```
+
+```{r}
+# Hypothesis Testing (t-test) between flipper_length_mm of Adelie and Gentoo species
+adelie <- subset(penguins_clean, species == "Adelie")$flipper_length_mm
+gentoo <- subset(penguins_clean, species == "Gentoo")$flipper_length_mm
+t_test_penguins <- t.test(adelie, gentoo)
+print(t_test_penguins)
+```
+
+```{r}
+# Visualization of Palmer Penguins Dataset
+# Histogram for flipper_length_mm
+ggplot(penguins_clean, aes(x = flipper_length_mm)) +
+  geom_histogram(binwidth = 3, fill = "green", color = "black") +
+  ggtitle("Histogram of Flipper Length in Palmer Penguins Dataset")
+
+# Boxplot for flipper_length_mm across Species
+ggplot(penguins_clean, aes(x = species, y = flipper_length_mm, fill = species)) +
+  geom_boxplot() +
+  ggtitle("Boxplot of Flipper Length by Species in Palmer Penguins Dataset")
+```
+
+
+
