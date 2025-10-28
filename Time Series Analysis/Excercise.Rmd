@@ -1,0 +1,147 @@
+---
+title: "Lab Exercise"
+author: "R V Abhishek"
+date: "2025-09-23"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies:
+    - fancyhdr
+    - graphicx
+  word_document: default
+  html_document:
+    theme: cerulean
+    highlight: tango
+    number_lines: true
+---
+
+
+
+# Data Visualisation with the Palmer penguins Dataset
+
+Variables in the dataset: bill_length, bill_depth, flipper_length, body_mass, species, island, sex
+
+```{r}
+# Load necessary libraries
+library(palmerpenguins)
+library(ggplot2)
+library(dplyr)
+
+# Load the penguins dataset
+data("penguins")
+
+# Display the first few rows of the dataset
+head(penguins)
+
+# Q1. Scatter plot of bill.length.mm vs bill.depth.mm
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm)) +
+  geom_point() +
+  labs(title = "Scatter Plot of Bill Length vs Bill Depth",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)") +
+  theme_minimal()
+```
+```{r}
+# Q2. Scatter plot colored by species
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species)) +
+  geom_point() +
+  theme_minimal()
+```
+
+```{r}
+# Q3. Change point size based on body mass
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species, size = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal()
+```
+
+```{r}
+# Q4. Facet by island
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species, size = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal() +
+  facet_wrap(~ island)
+```
+
+```{r}
+# Q5. Add axis title and meaningful labels
+ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, color = species, size = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal() +
+  facet_wrap(~ island) +
+  labs(title = "Penguin Bill Dimensions by Species and Island",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       color = "Species",
+       size = "Body Mass (g)")
+``` 
+
+```{r}
+# Q6. Box plot of flipper length accross species
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+  geom_boxplot() +
+  theme_minimal() +
+  labs(title = "Box Plot of Flipper Length by Species",
+       x = "Species",
+       y = "Flipper Length (mm)") +
+  theme(legend)
+```
+
+```{r}
+# Q7. Violin plot instead of box plot
+ggplot(penguins, aes(x = species, y = flipper_length_mm, fill = species)) +
+  geom_violin() +
+  theme_minimal() +
+  labs(title = "Violin Plot of Flipper Length by Species",
+       x = "Species",
+       y = "Flipper Length (mm)") +
+  theme(legend)
+```
+```{r}
+# Q8. Histogram of body mass
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 100, fill = "blue") +
+  theme_minimal() +
+  labs(title = "Histogram of Body Mass",
+       x = "Body Mass (g)",
+       y = "Count")
+```
+```{r}
+# Q9. Annotate tallest Penguin flipper range on the histogram
+tallest_flipper <- penguins %>%
+  filter(flipper_length_mm == max(flipper_length_mm, na.rm = TRUE)) %>%
+  select(body_mass_g)
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 100, fill = "blue") +
+  theme_minimal() +
+  labs(title = "Histogram of Body Mass with Tallest Flipper Annotation",
+       x = "Body Mass (g)",
+       y = "Count") +
+  annotate("text", x = tallest_flipper$body_mass_g, y = 9, label = "Tallest Flipper",
+           angle = 90, color = "red")
+```
+
+```{r}
+# Q10. Save with ggsave
+plot <- ggplot(penguins, aes(x = bill_length_mm, y = bill_depth_mm, 
+                             color = species, size = body_mass_g)) +
+  geom_point(alpha = 0.7) +
+  theme_minimal() +
+  facet_wrap(~ island) +
+  labs(title = "Penguin Bill Dimensions by Species and Island",
+       x = "Bill Length (mm)",
+       y = "Bill Depth (mm)",
+       color = "Species",
+       size = "Body Mass (g)")
+ggsave("penguin_bill_dimensions.png", plot = plot, width = 10, height = 6)
+
+ggplot(penguins, aes(x = body_mass_g)) +
+  geom_histogram(binwidth = 100, fill = "blue") +
+  theme_minimal() +
+  labs(title = "Histogram of Body Mass with Tallest Flipper Annotation",
+       x = "Body Mass (g)",
+       y = "Count") +
+  annotate("text", x = tallest_flipper$body_mass_g, y = 9, label = "Tallest Flipper",
+           angle = 90, color = "red")
+ggsave("penguin_body_mass_histogram.png", width = 8, height = 5)
+```

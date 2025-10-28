@@ -1,0 +1,117 @@
+---
+title: "Lab Program - 6"
+author: "R V Abhishek"
+date: "2025-09-23"
+output: 
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies:
+    - fancyhdr
+    - graphicx
+  word_document: default
+  html_document:
+    theme: cerulean
+    highlight: tango
+    number_lines: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+# Data Visualisation with ggplot2 and Customisations
+
+*Objective:* This program evaluates students’ ability to create and customize complex data visualizations using the ggplot2 package.
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(dplyr)
+library(reshape2)
+
+# Scatterplot with regression line and confidence intervals
+data("mpg")
+
+ggplot(mpg, aes(x = displ, y = hwy, color = class)) +
+  geom_point(size = 3, alpha = 0.7) +
+  geom_smooth(method = "lm", se = TRUE, linetype = "dashed") +
+  labs(title = "Scatterplot of Engine Displacement vs Highway MPG with Regression Line",
+       x = "Engine Displacement (liters)",
+       y = "Highway MPG",
+       color = "Vehicle Class") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        legend.position = "bottom")
+
+# Multi-panel plot using Faceting
+# Creating faceted scatter plots by vehicle class with enhanced aesthetics
+ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(color = "darkgreen", size = 2) +
+  facet_wrap(~ class, ncol = 3) +
+  labs(title = "Faceted Scatterplot of Engine Displacement vs Highway MPG by Vehicle Class",
+       x = "Engine Displacement (liters)",
+       y = "Highway MPG",
+       color = "Drive Type") +
+  theme_minimal() +
+  theme(strip.text = element_text(size = 12, face = "italic"),
+        plot.title = element_text(hjust = 0.5, size = 16))
+
+# Heatmap of correlatio matrix
+data("diamonds")
+
+# Calculate correlation matrix for numeric variables
+cor_matrix <- cor(diamonds[sapply(diamonds, is.numeric)], use = "complete.obs")
+
+#Convert to tidy format
+cor_melt <- melt(cor_matrix)
+
+# Create heatmap
+ggplot(cor_melt, aes(Var1, Var2, fill = value)) +
+  geom_tile(color = "white") +
+  scale_fill_gradient2(low = "blue", high = "red", mid = "white", 
+                       midpoint = 0, limit = c(-1, 1), space = "Lab",
+                       name = "Correlation") +
+  labs(title = "Heatmap of Correlation Matrix for Diamonds Dataset",
+       x = "Variables",
+       y = "Variables") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 12),
+        axis.text.y = element_text(size = 12),
+        plot.title = element_text(hjust = 0.5, size = 16))
+
+# Enhancing the scatterplot with annotations
+ggplot(mpg, aes(x = displ, y = hwy, color = "class")) +
+  geom_point(size = 3, shape = 21, fill = "lightblue", alpha = 0.8) +
+  theme_light() +
+  scale_color_brewer(palette = "Set2") +
+  labs(title = "Customised scatter plot with Aesthetic Enhancements",
+       x = "Engine Displacement (liters)",
+       y = "Highway MPG",
+       color = "Vehicle Class") +
+  theme(plot.title = element_text(face = "bold", size = 18),
+        axis.title = element_text(size = 14),
+        legend.background = element_rect(fill = "gray90"))
+
+# Annonate plots and save as image files
+annotated_plot <- ggplot(mpg, aes(x = displ, y = hwy)) +
+  geom_point(size = 3, color = "purple") +
+  geom_smooth(method = "lm", se = TRUE, linetype = "dashed") +
+  labs(title = "A",
+       x = "Engine Displacement (liters)",
+       y = "Highway MPG",
+       color = "Vehicle Class") +
+  theme_bw() +
+  theme(plot.title = element_text(hjust = 0.5, size = 16, face = "bold"),
+        axis.title = element_text(size = 14),
+        legend.position = "bottom") +
+  annotate("text", x = 4, y = 40, label = "High Effeciency Zone", 
+           color = "red", size = 5, angle = 15) +
+  annotate("rect", xmin = 1, xmax = 2, ymin = 30, ymax = 45, 
+           alpha = 0.2, fill = "yellow", color = "orange")
+
+ggsave("annotated_scatterplot.png", plot = annotated_plot, width = 8, height = 6)
+
+```
+      

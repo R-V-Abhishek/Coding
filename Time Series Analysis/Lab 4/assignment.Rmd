@@ -1,0 +1,106 @@
+---
+title: "Assignment"
+author: "R V Abhishek"
+date: "2025-09-09"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies: ["fancyhdr", "graphicx"]
+  html_document:
+    theme: "cerulean"
+    highlight: "tango"
+    number_lines: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+# Statistical Analysis of the 'mtcars' Dataset
+
+```{r}
+# Load necessary libraries
+library(ggplot2)
+library(ggcorrplot)
+
+# Load the built-in mtcars dataset
+data(mtcars)
+
+# Calculate the mean and standard deviation for the mpg variable
+mean_mpg <- mean(mtcars$mpg)
+sd_mpg <- sd(mtcars$mpg)
+
+# Create a frequency table for the cyl variable
+cyl_counts <- table(mtcars$cyl)
+
+# Perform a t-test to compare the mean mpg for different cylinder counts
+mpg_4cyl <- mtcars$mpg[mtcars$cyl == 4]
+mpg_6cyl <- mtcars$mpg[mtcars$cyl == 6]
+t_test_mpg <- t.test(mpg_4cyl, mpg_6cyl)
+
+# Generate a boxplot to visualize the distribution of mpg by cylinder count
+ggplot(mtcars, aes(x = factor(cyl), y = mpg)) +
+  geom_boxplot(fill = "lightblue", color = "black") +
+  labs(title = "MPG Distribution by Number of Cylinders",
+       x = "Number of Cylinders",
+       y = "Miles Per Gallon (mpg)")
+
+# Compute the correlation matrix for selected numeric variables
+numeric_mtcars <- mtcars[, c("mpg", "cyl", "disp", "hp", "drat", "wt", "qsec")]
+correlation_matrix <- cor(numeric_mtcars)
+
+# Perform a t-test to compare the mean weight of manual and automatic cars
+wt_auto <- mtcars$wt[mtcars$am == 0]
+wt_manual <- mtcars$wt[mtcars$am == 1]
+t_test_wt <- t.test(wt_auto, wt_manual)
+
+# Visualize the correlation matrix using a specialized plotting function
+ggcorrplot(correlation_matrix,
+           method = "circle",
+           lab = TRUE,
+           title = "Correlation Matrix of mtcars")
+
+# Calculate the mean and standard deviation of horsepower for 8-cylinder cars
+hp_8cyl <- mtcars$hp[mtcars$cyl == 8]
+mean_hp_8cyl <- mean(hp_8cyl)
+sd_hp_8cyl <- sd(hp_8cyl)
+
+# Generate a histogram to visualize the distribution of qsec
+ggplot(mtcars, aes(x = qsec)) +
+  geom_histogram(binwidth = 0.5, fill = "green", color = "black") +
+  labs(title = "Histogram of 1/4 Mile Time (qsec)",
+       x = "1/4 Mile Time (seconds)")
+
+# Create a scatter plot to visualize the relationship between horsepower and mpg
+ggplot(mtcars, aes(x = hp, y = mpg)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(title = "Relationship between Horsepower and MPG",
+       x = "Horsepower (hp)",
+       y = "Miles Per Gallon (mpg)")
+
+# Perform Z-score analysis to identify outliers in selected variables
+z_scores_df <- scale(mtcars)
+outliers <- which(abs(z_scores_df) > 3, arr.ind = TRUE)
+
+# Display results
+print("Mean MPG:")
+print(mean_mpg)
+print("Standard Deviation of MPG:")
+print(sd_mpg)
+print("Cylinder Counts:")
+print(cyl_counts)
+print("T-test Results for MPG (4 vs 6 cylinders):")
+print(t_test_mpg)
+print("Mean Horsepower for 8-cylinder cars:")
+print(mean_hp_8cyl)
+print("Standard Deviation of Horsepower for 8-cylinder cars:")
+print(sd_hp_8cyl)
+print("T-test Results for Weight (Manual vs Automatic):")
+print(t_test_wt)
+print("Outliers based on Z-scores:")
+print(outliers)
+
+```
+

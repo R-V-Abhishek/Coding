@@ -1,6 +1,6 @@
 from tensorflow.keras import layers, models, optimizers
 import numpy as np
-import matplotlib. pyplot as plt
+import matplotlib.pyplot as plt
 # I. Create synthetic data
 def create_data():
     X = np.random.randn(1000, 10)  # 1000 samples, 10 features

@@ -1,0 +1,138 @@
+---
+title: "Lab Program - 5"
+author: "R V Abhishek"
+date: "2025-09-16"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies:
+    - fancyhdr
+    - graphicx
+  word_document: default
+  html_document:
+    theme: cerulean
+    highlight: tango
+    number_lines: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+# Advanced Data Manipulation with dplyr and Complex Grouping
+
+*Objective* - The goal of this program is to test advanced data manipulation techniques using the dplyr package.
+
+```{r}
+# Load necessary libraries
+library(dplyr)
+library(nycflights13)
+library(ggplot2)
+library(zoo)
+
+# Preview the Star Wars Dataset
+data("starwars")
+head(starwars)
+
+# Selct specific columns(name, species, height, mass), and filtering out the missing species and arranging by height in descending order
+starwars_filtered <- starwars %>%
+  select(name, species, height, mass) %>%
+  filter(!is.na(species) & is.na(height) & height > 100) %>%
+  arrange(desc(height))
+
+#Display the filtered data
+head(starwars_filtered)
+
+# Plotting the filtered data
+ggplot(starwars_filtered, aes(x = reorder(name, -height), y = height, fill = species)) +
+  geom_point(stat = "identity") +
+  coord_flip() +
+  labs(title = "Height of Star Wars Characters",
+       x = "Character",
+       y = "Height (cm)") +
+  theme_minimal()
+
+# Grouping by species, calculating average height and mass, and counting observation
+species_summary <- starwars %>%
+  group_by(species) %>%
+  summarise(
+    avg_height = mean(height, na.rm = TRUE),
+    avg_mass = mean(mass, na.rm = TRUE),
+    count = n()
+  ) %>%
+  arrange(desc(count))
+
+# Display the species summary
+head(species_summary)
+
+# Plotting the average height
+ggplot(species_summary, aes(x = reorder(species, -avg_height), y = avg_height, fill = species)) +
+  geom_bar(stat = "identity") +
+  coord_flip() +
+  labs(title = "Average Height by Species",
+       x = "Species",
+       y = "Average Height (cm)") +
+  theme_minimal()
+
+# Adding a new column that classifies characters based on height
+starwars_classified <- starwars %>%
+  mutate(height_category = ifelse(height < 180, "Tall", "Short"))
+
+# Display the classified data
+head(starwars_classified)
+
+# Plotting height Category distribution
+ggplot(starwars_classified, aes(x = height_category, fill = height_category)) +
+  geom_bar() +
+  labs(title = "Height Category Distribution",
+       x = "Height Category",
+       y = "Count") +
+  theme_minimal()
+
+# Joining with another dataset (flights dataset from nycflights13)
+data("flights")
+data("airlines")
+
+# Inner join flights with airlines on the common column "carrier"
+flights_inner_join <- flights %>%
+  inner_join(airlines, by = "carrier")
+
+# Outer join flights with airlines on the common column "carrier"
+flights_outer_join <- flights %>%
+  full_join(airlines, by = "carrier")
+
+# Display the joined data
+head(flights_inner_join)
+head(flights_outer_join)
+
+# Calculating a 5 period rolling average of arrival delays and cumulative sum
+flights_rolling <- flights %>%
+  arrange(year, month, day) %>%
+  mutate(
+    rolling_avg_delay = zoo::rollmean(arr_delay, 5, fill = NA),
+    cumulative_delay = cumsum(arr_delay)
+  )
+
+# Compute the rolling average and cumulative suma
+flights_rolling <- flights %>%
+  arrange(year, month, day) %>%
+  mutate(
+    arr_delay = ifelse(is.na(arr_delay), 0, arr_delay),
+    rolling_avg_delay = rollmean(arr_delay, 5, fill = NA),
+    cumulative_delay = cumsum(arr_delay)
+  )
+
+# Display the transformed data
+head(flights_rolling)
+
+# Plotting the rolling average and cumulative delays
+ggplot(flights_rolling, aes(x = day)) +
+  geom_line(aes(y = rolling_avg_delay, color = "Rolling Average Delay")) +
+  geom_line(aes(y = cumulative_delay / 1000, color = "Cumulative Delay (x1000)")) +
+  labs(title = "Rolling Average and Cumulative Arrival Delays",
+       x = "Day of the Month",
+       y = "Delay (minutes)") +
+  scale_color_manual(values = c("Rolling Average Delay" = "blue", "Cumulative Delay (x1000)" = "red")) +
+  theme_minimal()
+```
+

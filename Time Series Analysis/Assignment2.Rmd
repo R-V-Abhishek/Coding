@@ -1,0 +1,188 @@
+---
+title: "Assignment2"
+author: "R V Abhishek"
+date: "2025-09-12"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies: ["fancyhdr", "graphicx"]
+  html_document:
+    theme: "cerulean"
+    highlight: "tango"
+    number_lines: true
+editor_options: 
+  markdown: 
+    wrap: 72
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+```{r}
+# Loading necessary libraries
+library(ggplot2)
+library(zoo)         
+library(dplyr)
+
+# Data initialization
+values <- c(15,18,14,20,16,19,15,21,17,21,16,22,14,20,13,24,15,17,18,26)
+
+# Mean
+mean_val <- mean(values)
+mean_val
+
+# Median
+median_val <- median(values)
+median_val
+
+# Mode function
+get_mode <- function(x) {
+  ux <- unique(x)
+  ux[which.max(tabulate(match(x, ux)))]
+}
+mode_val <- get_mode(values)
+mode_val
+```
+
+*Interpretation:* The mean = r mean_val, median = r median_val, and the
+mode = r mode_val. These show the central tendency of quarterly sales.
+
+```{r}
+# Population and Sample calculations
+pop_var  <- mean((values - mean_val)^2)
+pop_sd   <- sqrt(pop_var)
+
+samp_var <- var(values)
+samp_sd  <- sd(values)
+
+pop_var; pop_sd
+samp_var; samp_sd
+```
+
+*Interpretation:* The population variance = r pop_var and standard
+deviation = r pop_sd. The sample variance = r samp_var and standard
+deviation = r samp_sd. This indicates the spread of quarterly sales
+data.
+
+```{r}
+# Time series Plot
+tsq <- ts(values, start = c(2021,1), frequency = 4)
+plot(tsq, col="blue", lwd=2, main="Quarterly Sales (in 000 units)",
+     xlab="Year", ylab="Sales")
+```
+
+*Comment*: From the plot, sales are generally increasing in Q4 each
+year. Q1 tends to be the lowest. This indicates seasonality.
+
+```{r}
+# Correlation value and optimal significance test
+q1 <- c(15,16,17,14,15)
+q2 <- c(18,19,21,20,17)
+
+cor_val <- cor(q1, q2)
+cor_val
+
+cor.test(q1, q2)
+```
+
+*Hypotheses:* H0: No correlation between Q1 and Q2 H1: There is
+correlation
+
+*Interpretation:* The correlation = r round(cor_val,2). The p-value
+tells us if this correlation is significant.
+
+```{r}
+# Paired t-test
+q4 <- c(20,21,22,24,26)
+t.test(q1, q4, paired = TRUE)
+```
+
+*Hypotheses:* H0: Mean(Q1) = Mean(Q4) H1: Mean(Q1) ≠ Mean(Q4)
+
+*Conclusion:* The p-value shows whether Q1 and Q4 sales are
+significantly different. Since Q4 values look much higher, we expect
+rejection of H0.
+
+```{r}
+# One sample t-test
+t.test(values, mu = 18)
+```
+
+*Hypotheses:* H0: Mean quarterly sales = 18 H1: Mean quarterly sales ≠
+18
+
+*Conclusion:* The test result shows if the average is statistically
+different from 18.
+
+```{r}
+# Additive Decomposition
+dec_add <- decompose(tsq, type = "additive")
+plot(dec_add)
+```
+
+*Comment:* The additive model splits sales into trend, seasonal and
+residual. We see upward spikes in Q4 consistently, so seasonality is
+strong.
+
+```{r}
+# Multiplicative Decomposition
+dec_add <- decompose(tsq, type = "additive")
+plot(dec_add)
+```
+
+*Comment:* The multiplicative decomposition also shows a seasonal
+effect. By comparing plots, multiplicative may fit better if the
+seasonal effect grows with trend, otherwise additive is fine.
+
+```{r}
+# Preparation of data
+df <- data.frame(
+  year = rep(2021:2025, each = 4),
+  quarter = rep(paste0("Q",1:4), times = 5),
+  value = values
+)
+
+# Ratio to Moving Average Seasonal Indices
+ma4 <- rollmean(values, k = 4, align = "center", na.pad = TRUE)
+df_ma <- df %>% mutate(ma = ma4, ratio = value/ma)
+
+seasonal_rtma <- df_ma %>%
+  filter(!is.na(ratio)) %>%
+  group_by(quarter) %>%
+  summarise(avg_ratio = mean(ratio))
+
+seasonal_rtma$norm <- seasonal_rtma$avg_ratio / mean(seasonal_rtma$avg_ratio)
+seasonal_rtma
+```
+
+*Comment:* These are the seasonal indices using RTMA. They show how much
+each quarter deviates from the average trend.
+
+```{r}
+# Ratio to trend Seasonal Indices
+time_index <- 1:length(values)   # create time variable
+
+model <- lm(values ~ time_index) # fit trend line
+trend <- predict(model)
+
+df_tr <- tibble(
+  value = values,
+  trend = trend,
+  quarter = cycle(tsq)
+)
+
+df_tr <- df_tr %>% mutate(ratio = value / trend)
+
+season_rt <- df_tr %>%
+  group_by(quarter) %>%
+  summarise(avg_ratio = mean(ratio))
+
+season_rt$norm <- season_rt$avg_ratio / mean(season_rt$avg_ratio)
+season_rt
+```
+
+*Comment:* These are the seasonal indices from the ratio-to-trend
+method. By comparing with Q9, the values are similar, confirming the
+seasonal pattern.

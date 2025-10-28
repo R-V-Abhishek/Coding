@@ -1,0 +1,154 @@
+---
+title: "Lab Program 4"
+author: "R V Abhishek"
+date: "2025-09-09"
+output:
+  pdf_document:
+    latex_engine: xelatex
+    extra_dependencies:
+    - fancyhdr
+    - graphicx
+  word_document: default
+  html_document:
+    theme: cerulean
+    highlight: tango
+    number_lines: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,number.lines = TRUE)
+knitr::opts_chunk$set(comment = "")
+```
+
+# Data Import, Cleaning, and Export with Advanced Data Wrangling
+
+*Objective*: Real World Data Cleaning Processes and emphasis on usage of advanced data wrangling techniques in R.
+
+```{r}
+# Load necessary libraries
+library(tidyverse)
+library(titanic)
+library(dplyr)
+library(caret)
+library(ggcorrplot)
+
+# Load the Titanic dataset
+data <- titanic::titanic_train
+
+# Handle the missing data
+# Replace missing values in the 'Age' column with the median age
+data$Age[is.na(data$Age)] <- median(data$Age, na.rm = TRUE)
+
+# Replace missing values in the 'Embarked' column with the mode
+mode_embarked <- as.character(names(sort(table(data$Embarked), decreasing = TRUE)[1]))
+data$Embarked[is.na(data$Embarked)] <- mode_embarked
+
+# Define the numeric columns for z-score and correlation calculation
+numeric_columns <- c("Age", "SibSp", "Parch", "Fare", "Survived", "Pclass")
+
+# Remove outliers using z-score
+z_scores <- as.data.frame(scale(data[, numeric_columns]))
+
+# Identify the rows that have z_scores greater than 3 or less than -3 (outliers)
+outlier_rows <- apply(z_scores, 1, function(row) any(abs(row) > 3))
+
+# Filter out Outliers
+data_cleaned <- data[!outlier_rows, ]
+
+# Summarize the dataset before and after cleaning
+summary_before <- summary(data)
+summary_after <- summary(data_cleaned)
+
+# Calculate Correlation Matrix (fixed)
+correlation_matrix <- cor(data_cleaned[, numeric_columns], use = "complete.obs")
+
+# Export cleaned data onto a new CSV file
+write.csv(data_cleaned, "titanic_cleaned.csv", row.names = FALSE)
+
+# Display Summaries
+print("Summary Before Cleaning:")
+print(summary_before)
+
+print("Summary After Cleaning:")
+print(summary_after)
+
+print("Correlation Matrix:")
+print(correlation_matrix)
+
+# Visualize Correlation Matrix (fixed)
+ggcorrplot(correlation_matrix,
+           method = "circle",
+           lab = TRUE) +
+  ggtitle("Correlation Matrix of Titanic Dataset")
+```
+*Objective* - Data Import, Cleaning, and Export with Adult Income Dataset
+```{r}
+# Load necessary libraries
+library(tidyverse)
+library(dplyr)
+library(caret)
+library(ggcorrplot)
+
+# Load the Adult Income dataset
+data <- read.csv("D:/Coding/Coding/Time Series Analysis/Lab 4/adult.data", header = FALSE)
+
+# Assign column names based on the dataset documentation
+colnames(data) <- c('age', 'workclass', 'fnlwgt', 'education', 'education_num', 'marital_status', 'occupation', 'relationship', 'race', 'sex', 'capital_gain', 'capital_loss', 'hours_per_week', 'native_country', 'income')
+
+# Handle missing values represented by '?'
+data[data == '?'] <- NA
+
+# Replace categorical missing values with mode
+replace_mode <- function(x){
+  mode_val <- as.character(names(sort(table(x), decreasing = TRUE)[1]))
+  x[is.na(x)] <- mode_val
+  return(x)
+}
+
+data <- data %>%
+  mutate_if(is.character, replace_mode)
+
+# Replace numeric missing values with median
+data <- data %>%
+  mutate_if(is.numeric, ~ifelse(is.na(.), median(., na.rm = TRUE), .))
+
+# Define the remove_outliers function
+remove_outliers <- function(x){
+  z_scores <- scale(x)
+  x[abs(z_scores) <= 3]
+}
+
+# Remove outliers using z-score
+numeric_columns <- sapply(data, is.numeric)
+
+# Apply z-score outlier removal to numeric columns
+data_cleaned <- data %>%
+  filter(!apply(as.data.frame(scale(data[, numeric_columns])), 1, function(row) any(abs(row) > 3)))
+
+# Summarize before and after cleaning
+summary_before <- summary(data)
+summary_after <- summary(data_cleaned)
+
+# Calculate correlation Matrix
+correlation_matrix <- cor(data_cleaned[, numeric_columns], use = "complete.obs")
+
+# Export as CSV
+write.csv(data_cleaned, "cleaned_adult_income_data.csv", row.names = FALSE)
+
+# Display Summaries
+print("Summary Before Cleaning:")
+print(summary_before)
+
+print("Summary After Cleaning:")
+print(summary_after)
+
+print("Correlation Matrix:")
+print(correlation_matrix)
+
+# Visualize Correlation Matrix (fixed)
+ggcorrplot(correlation_matrix,
+           method = "circle",
+           lab = TRUE) +
+  ggtitle("Correlation Matrix of Adult Income Dataset")
+```
+
